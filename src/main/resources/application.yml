@@ -3,9 +3,9 @@ spring:
   # Database
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://flora.db.elephantsql.com/goqiiclc
-    username: goqiiclc
-    password: Ph9h-RloqaKXArOIX4_RucN4WMws0-1Z
+    url: jdbc:postgresql://${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
   # JPA properties
   jpa:
     hibernate.ddl-auto: update
@@ -17,4 +17,4 @@ server:
 security:
   user:
     name: user
-password: user
+    password: user

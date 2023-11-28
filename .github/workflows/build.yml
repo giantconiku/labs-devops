@@ -13,6 +13,8 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
+    - name: Set up secrets
+      run: echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env && echo "DATABASE_USERNAME=${{ secrets.DATABASE_USERNAME }}" >> .env && echo "DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }}" >> .env
     - name: Build with Maven
       run: mvn -B package --file pom.xml
     - name: Publish to Docker Hub
@@ -20,5 +22,5 @@ jobs:
       with:       
        username: ${{ secrets.DOCKER_HUB_USERNAME }} 
        password:  ${{ secrets.DOCKER_HUB_PASSWORD }}
-       repository: lmilt95/fti       
+       repository: giantconiku/labs-devops
        tags: ${{github.run_number}}
