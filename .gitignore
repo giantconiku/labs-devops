@@ -23,6 +23,3 @@
 /dist/
 /nbdist/
 /.nb-gradle/
-
-### Ignoring application.properties ###
-src/main/resources/application.properties
