@@ -25,5 +25,4 @@ jobs:
        username: ${{ secrets.DOCKER_HUB_USERNAME }} 
        password:  ${{ secrets.DOCKER_HUB_PASSWORD }}
        repository: giantconiku/labs-devops
-       tags: ${{github.run_number}}
-
+       tags: latest
