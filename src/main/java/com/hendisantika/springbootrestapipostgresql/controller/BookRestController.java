@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Collection;
 import java.util.Optional;
 
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
+
 /**
  * Created by IntelliJ IDEA.
  * Project : spring-boot-rest-api-postgresql
@@ -32,6 +35,8 @@ import java.util.Optional;
 @RequestMapping("/api/books")
 public class BookRestController {
 
+    Logger logger = LoggerFactory.getLogger(BookRestController.class);
+
     @Autowired
     private BookRepository repository;
 
@@ -42,6 +47,7 @@ public class BookRestController {
 
     @GetMapping
     public ResponseEntity<Collection<Book>> getAllBooks() {
+        logger.info("I am a Get Request and I am done !");
         return new ResponseEntity<>(repository.findAll(), HttpStatus.OK);
     }
 

@@ -1,53 +1,36 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend
+  name: labswork
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: backend
+      app: labswork
   template:
     metadata:
       labels:
-        app: backend
+        app: labswork
     spec:
       containers:
-      - name: backend
+      - name: labswork
         image: giantconiku/labs-devops:latest
+        env:
+          - name: DATABASE_URL
+            value: flora.db.elephantsql.com/goqiiclc
+          - name: DATABASE_USERNAME
+            value: goqiiclc
+          - name: DATABASE_PASSWORD
+            value: Ph9h-RloqaKXArOIX4_RucN4WMws0-1Z
         imagePullPolicy: Always
-        securityContext:
-          allowPrivilegeEscalation: false
-          runAsUser: 10001
-          seccompProfile:
-            type: RuntimeDefault
-          runAsNonRoot: true
-          readOnlyRootFilesystem: true
-          capabilities:
-            drop:
-            - ALL
-        resources:
-          requests:
-            memory: "1024Mi"
-            cpu: "500m"
-          limits:
-            memory: "1024Mi"
-            cpu: "500m"
         ports:
         - containerPort: 8080
-        livenessProbe:
-          httpGet:
-            path: /
-            port: 8080
-          initialDelaySeconds: 60
-          failureThreshold: 3
-          periodSeconds: 60
-        readinessProbe:
-          httpGet:
-            path: /
-            port: 8080
-          initialDelaySeconds: 60
-          failureThreshold: 3
-          periodSeconds: 60
+        volumeMounts:
+          - name: logs-volume
+            mountPath: /var/logs
+      volumes:
+        - name: logs-volume
+          persistentVolumeClaim:
+            claimName: labs-logs-pvc
 
 # kubectl apply -f app-deployment.yaml 

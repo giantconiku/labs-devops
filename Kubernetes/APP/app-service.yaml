@@ -1,20 +1,20 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: backend-svc1
+  name: labswork-svc1
 spec:
   ports:
     - port: 8081
       protocol: TCP
       targetPort: 8080
   selector:
-    app: backend
+    app: labswork
   type: ClusterIP  
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: backend-svc2
+  name: labswork-svc2
 spec:
   type: NodePort
   ports:
@@ -22,6 +22,6 @@ spec:
       protocol: TCP
       targetPort: 8080
   selector:
-    app: backend 
+    app: labswork
 
 # kubectl apply -f app-service.yaml 
