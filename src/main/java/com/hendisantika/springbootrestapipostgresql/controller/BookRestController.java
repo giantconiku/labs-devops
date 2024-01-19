@@ -42,6 +42,7 @@ public class BookRestController {
 
     @PostMapping
     public ResponseEntity<?> addBook(@RequestBody Book book) {
+        logger.info("I am a Post Request and I am done !");
         return new ResponseEntity<>(repository.save(book), HttpStatus.CREATED);
     }
 
